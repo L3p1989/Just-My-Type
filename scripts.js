@@ -24,4 +24,4 @@ $('body').keypress(function(e) {
             backgroundColor: '#f5f5f5'
         });
     });
-})
+});//this highlights the pressed key for a moment
