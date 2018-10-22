@@ -1,5 +1,6 @@
 var sentences = ['ten ate neite ate nee enet ite ate inet ent eate', 'Too ato too nOt enot one totA not anot tOO aNot', 'oat itain oat tain nate eate tea anne inant nean', 'itant eate anot eat nato inate eat anot tain eat', 'nee ene ate ite tent tiet ent ine ene ete ene ate'];
 var sentenceCount = 0;
+var keyPress = 0;
 
 $('#keyboard-upper-container').hide();//hides upperCase keyboard by default
 
@@ -26,9 +27,14 @@ $('body').keypress(function (e) {
             borderRadius: '-=2px',
             backgroundColor: '#f5f5f5'
         });
-    }); sentenceCount++;
-    $('#sentence').text(sentences[sentenceCount]);
-
+    }); keyPress++;
+    if (sentences[sentenceCount][keyPress] == sentences[0][48] || sentences[1][47] || sentences[2][48] || sentences[3][48])  {
+        sentenceCount++;
+        keyPress = 0;
+        $('#sentence').text(sentences[sentenceCount]);
+    };
 });//this highlights the pressed key for a moment, and tracks the correct key was pressed
 
 $('#sentence').append(sentences[0]);//this appends current sentence to top of the page
+
+sentences[sentenceCount][keypress].css('backgroundColor', 'yellow')
