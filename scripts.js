@@ -28,13 +28,13 @@ $('body').keypress(function (e) {
             backgroundColor: '#f5f5f5'
         });
     }); keyPress++;
+    $('#yellow-block').animate({ left: "+=17.5px"});
     if (sentences[sentenceCount][keyPress] == sentences[0][48] || sentences[1][47] || sentences[2][48] || sentences[3][48])  {
         sentenceCount++;
         keyPress = 0;
+        $('#yellow-block').animate({left: '15px'})
         $('#sentence').text(sentences[sentenceCount]);
     };
 });//this highlights the pressed key for a moment, and tracks the correct key was pressed
 
 $('#sentence').append(sentences[0]);//this appends current sentence to top of the page
-
-sentences[sentenceCount][keypress].css('backgroundColor', 'yellow')
