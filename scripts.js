@@ -53,15 +53,15 @@ $('body').keypress(function (e) {
         $('#stop-go').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUrCET8arubXWUHRwAT4mg5vj6ZylmC3_ongmidqgoP9U2UYYa');//posts red X img to `#feedback`
     };
     $('#' + e.which).animate({
-        padding: '+=2px',
-        borderRadius: '+=2px',
+        padding: '26px',
+        borderRadius: '8px',
         backgroundColor: '#e3e3e3'
-    }, function () {
+    }, 50, function () {
         $(this).animate({
-            padding: '-=2px',
-            borderRadius: '-=2px',
+            padding: '24px',
+            borderRadius: '6px',
             backgroundColor: '#f5f5f5'
-        });//animates the correct key on screen
+        }, 50);//animates the correct key on screen
     }); if (sentences[sentenceCount][keyPress] == [0][47] || [1][46] || [2][47] || [3][47])  {
         
         sentenceCount++;
