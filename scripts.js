@@ -28,17 +28,18 @@ $('body').keypress(function (e) {
         $('#keyboard-lower-container').remove();//removes lowerCase keyboard
         $('#keyboard-upper-container').remove();//removes upperCase keyboard
         $('#32').remove();//removes spaceBar
+        $('#stop-go').remove();//removes `#stop-go` check
         
+        $('#feedback').append('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUrCET8arubXWUHRwAT4mg5vj6ZylmC3_ongmidqgoP9U2UYYa" id="end-no">');//appends img to `#feedback` for no
         $('#feedback').prepend('<img src="https://t3.ftcdn.net/jpg/00/88/93/72/240_F_88937261_fZzx2GOTcz0ijLz1tuVvZ3MlEH6sfP4B.jpg" id="end-yes">');//prepends img to `#feedback` for yes
-        $('#end-no').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUrCET8arubXWUHRwAT4mg5vj6ZylmC3_ongmidqgoP9U2UYYa');//posts red X img to `#feedback`
 
         $('#end-yes').click(function() {
             console.log(document.location.href = '');//resets game
         })
-
-        $('#target-letter').text("Your score is " + score + " words per minute! Would you like to try again?");//endgame message
-        $('body').off('keyPress');//removes .keypress
+        $('body').unbind("keypress");//removes .keypress
         
+        return $('#target-letter').text("Your score is " + score + " words per minute! Would you like to try again?");//endgame message
+
     } else if (String.fromCharCode(e.which) == sentences[sentenceCount][keyPress]) {
         keyPress++;
         
@@ -46,10 +47,10 @@ $('body').keypress(function (e) {
 
         $('#target-letter').text(sentences[sentenceCount][keyPress]);//changes text of `#target-letter` as keys are pressed
 
-        $('#end-no').attr('src', 'https://t3.ftcdn.net/jpg/00/88/93/72/240_F_88937261_fZzx2GOTcz0ijLz1tuVvZ3MlEH6sfP4B.jpg');//posts check img to `#feedback`
+        $('#stop-go').attr('src', 'https://t3.ftcdn.net/jpg/00/88/93/72/240_F_88937261_fZzx2GOTcz0ijLz1tuVvZ3MlEH6sfP4B.jpg');//posts check img to `#feedback`
     } else {
         numberOfMistakes++;
-        $('#end-no').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUrCET8arubXWUHRwAT4mg5vj6ZylmC3_ongmidqgoP9U2UYYa');//posts red X img to `#feedback`
+        $('#stop-go').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUrCET8arubXWUHRwAT4mg5vj6ZylmC3_ongmidqgoP9U2UYYa');//posts red X img to `#feedback`
     };
     $('#' + e.which).animate({
         padding: '+=2px',
@@ -69,7 +70,7 @@ $('body').keypress(function (e) {
 
         $('#target-letter').text(sentences[sentenceCount][keyPress]);
         
-        $('img').attr('src', '');//resets `#feedback` img
+        $('#stop-go').attr('src', '');//resets `#feedback` img
         
         $('#yellow-block').animate({left: '15px'}, .1);//resets `#yellow-block` position
         
@@ -82,4 +83,4 @@ $('#sentence').append(sentences[0]);//this appends current sentence to top of th
 
 $('#target-letter').append(sentences[0][0]);//starting position for `#target-letter`
 
-$('#feedback').append('<img src="" id="end-no">');//appends img to `#feedback` for checks and Xs
+$('#feedback').append('<img src="" id="stop-go">');//appends img to `#feedback` for checks and Xs
