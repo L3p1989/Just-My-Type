@@ -22,19 +22,34 @@ $('body').keydown(function (e) {
 $('body').keypress(function (e) {
     if (sentenceCount == 4 && keyPress == 48) {
         var endTime = new Date();
-        var minutes = endTime - startTime;
+        var minutes = endTime.getMinutes() - startTime.getMinutes();
         var score = numberOfWords / minutes - 2 * numberOfMistakes
 
         $('#keyboard-lower-container').remove();//removes lowerCase keyboard
         $('#keyboard-upper-container').remove();//removes upperCase keyboard
         $('#32').remove();//removes spaceBar
-        $('#target').after('<p class="yes-par"><button class="yes">Yes</button></p><p class="no-par"><button class="no">No</button></p>');//adds yes and no buttons
+        
+        $('#feedback').prepend('<img src="https://t3.ftcdn.net/jpg/00/88/93/72/240_F_88937261_fZzx2GOTcz0ijLz1tuVvZ3MlEH6sfP4B.jpg" id="end-yes">');//prepends img to `#feedback` for yes
+        $('#end-no').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUrCET8arubXWUHRwAT4mg5vj6ZylmC3_ongmidqgoP9U2UYYa');//posts red X img to `#feedback`
 
-        $('.yes').click(function() {
+        $('#end-yes').click(function() {
             console.log(document.location.href = '');//resets game
         })
 
-        return $('#target-letter').text("You're score is " + score + " words per minute! Would you like to try again?");//endgame message
+        $('#target-letter').text("Your score is " + score + " words per minute! Would you like to try again?");//endgame message
+        $('body').off('keyPress');//removes .keypress
+        
+    } else if (String.fromCharCode(e.which) == sentences[sentenceCount][keyPress]) {
+        keyPress++;
+        
+        $('#yellow-block').animate({ left: "+=17.5px"}, .1);//animates the yellow highlight
+
+        $('#target-letter').text(sentences[sentenceCount][keyPress]);//changes text of `#target-letter` as keys are pressed
+
+        $('#end-no').attr('src', 'https://t3.ftcdn.net/jpg/00/88/93/72/240_F_88937261_fZzx2GOTcz0ijLz1tuVvZ3MlEH6sfP4B.jpg');//posts check img to `#feedback`
+    } else {
+        numberOfMistakes++;
+        $('#end-no').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUrCET8arubXWUHRwAT4mg5vj6ZylmC3_ongmidqgoP9U2UYYa');//posts red X img to `#feedback`
     };
     $('#' + e.which).animate({
         padding: '+=2px',
@@ -46,18 +61,7 @@ $('body').keypress(function (e) {
             borderRadius: '-=2px',
             backgroundColor: '#f5f5f5'
         });//animates the correct key on screen
-    }); if (String.fromCharCode(e.which) == sentences[sentenceCount][keyPress]) {
-        keyPress++;
-        
-        $('#yellow-block').animate({ left: "+=17.5px"}, .1);//animates the yellow highlight
-
-        $('#target-letter').text(sentences[sentenceCount][keyPress]);//changes text of `#target-letter` as keys are pressed
-
-        $('img').attr('src', 'https://t3.ftcdn.net/jpg/00/88/93/72/240_F_88937261_fZzx2GOTcz0ijLz1tuVvZ3MlEH6sfP4B.jpg');//posts check img to `#feedback`
-    } else {
-        numberOfMistakes++;
-        $('img').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUrCET8arubXWUHRwAT4mg5vj6ZylmC3_ongmidqgoP9U2UYYa');//posts red X img to `#feedback`
-    }; if (sentences[sentenceCount][keyPress] == [0][47] || [1][46] || [2][47] || [3][47])  {
+    }); if (sentences[sentenceCount][keyPress] == [0][47] || [1][46] || [2][47] || [3][47])  {
         
         sentenceCount++;
         
@@ -78,4 +82,4 @@ $('#sentence').append(sentences[0]);//this appends current sentence to top of th
 
 $('#target-letter').append(sentences[0][0]);//starting position for `#target-letter`
 
-$('#feedback').append('<img src="">');//appends img to `#feedback` for checks and Xs
+$('#feedback').append('<img src="" id="end-no">');//appends img to `#feedback` for checks and Xs

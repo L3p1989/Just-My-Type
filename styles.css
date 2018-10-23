@@ -41,14 +41,10 @@
   color : #CD2626
 }
 
-.yes-par {
-  position: relative;
-  right: 50%;
-  left: 50%
+#end-yes {
+  cursor: pointer;
 }
 
-.no-par {
-  position: relative;
-  right: 50%;
-  left: 50%
+#end-no {
+  cursor: pointer;
 }
