@@ -4,7 +4,6 @@ var keyPress = 0;
 var numberOfWords = 54;
 var numberOfMistakes = 0;
 var startTime = new Date();
-var endTime 
 
 $('#keyboard-upper-container').hide();//hides upperCase keyboard by default
 
@@ -21,7 +20,22 @@ $('body').keydown(function (e) {
 });//this shows upperCase keyboard on shiftDown and hides it again on shiftUp
 
 $('body').keypress(function (e) {
-    console.log(keyPress)
+    if (sentenceCount == 4 && keyPress == 48) {
+        var endTime = new Date();
+        var minutes = endTime - startTime;
+        var score = numberOfWords / minutes - 2 * numberOfMistakes
+
+        $('#keyboard-lower-container').remove();
+        $('#keyboard-upper-container').remove();
+        $('#32').remove();
+        $('#target').after('<p class="yes-par"><button class="yes">Yes</button></p><p class="no-par"><button class="no">No</button></p>');
+
+        $('.yes').click(function() {
+            console.log(document.location.href = '');
+        })
+
+        return $('#target-letter').text("You're score is " + score + " words per minute! Would you like to try again?");
+    };
     $('#' + e.which).animate({
         padding: '+=2px',
         borderRadius: '+=2px',
@@ -57,12 +71,7 @@ $('body').keypress(function (e) {
         
         $('#sentence').text(sentences[sentenceCount]);//changes text of `#sentence` as the sentences change
     }//when all conditions are met for a sentence switch to next and reset all values
-    else if(sentences[sentenceCount][keyPress] == [4][48]) {
-        var endTime = new Date();
-        var minutes = startTime.getTime() - endTime.getTime();
-
-        return console.log(minutes)
-    }
+    
 });//this highlights the pressed key for a moment, and tracks the correct key was pressed, as well as moving the yellow cursor accross the screen
 
 $('#sentence').append(sentences[0]);//this appends current sentence to top of the page
