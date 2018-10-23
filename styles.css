@@ -40,3 +40,15 @@
 .glyphicon-remove {
   color : #CD2626
 }
+
+.yes-par {
+  position: relative;
+  right: 50%;
+  left: 50%
+}
+
+.no-par {
+  position: relative;
+  right: 50%;
+  left: 50%
+}
