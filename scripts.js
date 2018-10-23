@@ -34,8 +34,12 @@ $('body').keypress(function (e) {
         $('#feedback').prepend('<img src="https://t3.ftcdn.net/jpg/00/88/93/72/240_F_88937261_fZzx2GOTcz0ijLz1tuVvZ3MlEH6sfP4B.jpg" id="end-yes">');//prepends img to `#feedback` for yes
 
         $('#end-yes').click(function() {
-            console.log(document.location.href = '');//resets game
-        })
+            console.log(document.location.href = '');//refreshes game if green check is clicked
+        });
+        $('#end-no').click(function() {
+            close();
+        });//closes window if red x is clicked
+
         $('body').unbind("keypress");//removes .keypress
         
         return $('#target-letter').text("Your score is " + score + " words per minute! Would you like to try again?");//endgame message
