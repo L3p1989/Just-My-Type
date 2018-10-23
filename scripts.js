@@ -25,16 +25,16 @@ $('body').keypress(function (e) {
         var minutes = endTime - startTime;
         var score = numberOfWords / minutes - 2 * numberOfMistakes
 
-        $('#keyboard-lower-container').remove();
-        $('#keyboard-upper-container').remove();
-        $('#32').remove();
-        $('#target').after('<p class="yes-par"><button class="yes">Yes</button></p><p class="no-par"><button class="no">No</button></p>');
+        $('#keyboard-lower-container').remove();//removes lowerCase keyboard
+        $('#keyboard-upper-container').remove();//removes upperCase keyboard
+        $('#32').remove();//removes spaceBar
+        $('#target').after('<p class="yes-par"><button class="yes">Yes</button></p><p class="no-par"><button class="no">No</button></p>');//adds yes and no buttons
 
         $('.yes').click(function() {
-            console.log(document.location.href = '');
+            console.log(document.location.href = '');//resets game
         })
 
-        return $('#target-letter').text("You're score is " + score + " words per minute! Would you like to try again?");
+        return $('#target-letter').text("You're score is " + score + " words per minute! Would you like to try again?");//endgame message
     };
     $('#' + e.which).animate({
         padding: '+=2px',
