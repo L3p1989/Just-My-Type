@@ -21,6 +21,7 @@ $('body').keydown(function (e) {
 });//this shows upperCase keyboard on shiftDown and hides it again on shiftUp
 
 $('body').keypress(function (e) {
+    console.log(keyPress)
     $('#' + e.which).animate({
         padding: '+=2px',
         borderRadius: '+=2px',
@@ -42,8 +43,7 @@ $('body').keypress(function (e) {
     } else {
         numberOfMistakes++;
         $('img').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUrCET8arubXWUHRwAT4mg5vj6ZylmC3_ongmidqgoP9U2UYYa');//posts red X img to `#feedback`
-    };
-    if (sentences[sentenceCount][keyPress] == sentences[0][48] || sentences[1][47] || sentences[2][48] || sentences[3][48])  {
+    }; if (sentences[sentenceCount][keyPress] == [0][47] || [1][46] || [2][47] || [3][47])  {
         
         sentenceCount++;
         
@@ -57,9 +57,11 @@ $('body').keypress(function (e) {
         
         $('#sentence').text(sentences[sentenceCount]);//changes text of `#sentence` as the sentences change
     }//when all conditions are met for a sentence switch to next and reset all values
-    else if(sentences[sentenceCount][keyPress] == sentences[4][49]) {
+    else if(sentences[sentenceCount][keyPress] == [4][48]) {
         var endTime = new Date();
         var minutes = startTime.getTime() - endTime.getTime();
+
+        return console.log(minutes)
     }
 });//this highlights the pressed key for a moment, and tracks the correct key was pressed, as well as moving the yellow cursor accross the screen
 
